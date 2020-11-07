@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/custom/loginform.css' %}" />
+{% endblock head %}
+
+{% block content %}
+<div id="main" class="form-bg">
+    <form action="#" method="GET">
+        <fieldset>
+            <legend>Login</legend>
+            <p class="field-icon">
+                <input type="text" name="username" id="username" placeholder="email">
+                <label for="username"><span>Email</span></label>
+            </p>
+            <p class="field-icon">
+                <input type="password" name="pass" id="pass">
+                <label for="pass"><span>Password</span></label>
+            </p>
+            <p>
+                <input type="submit" value="Login">
+            </p>
+        </fieldset>
+    </form>
+</div>
+{% endblock content %}
