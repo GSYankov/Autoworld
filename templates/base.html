@@ -27,32 +27,18 @@
 <body>
 
 	<!-- Header -->
-	<div id="header"
-	{% if request.path != '/'%} 
-	class="header-insight"
-	{% else %}
-	class="header"
-	{% endif %}
-	>
-		<div id="nav-wrapper">
-			<!-- Nav -->
-			<nav id="nav">
-				<ul>
-					<li><a href="{% url 'home' %}">Homepage</a></li>
-					<li><a href="left-sidebar.html">Left Sidebar</a></li>
-					<li class="active"><a href="right-sidebar.html">Right Sidebar</a></li>
-					<li><a href="{% url 'login' %}">Log In</a></li>
-				</ul>
-			</nav>
-		</div>
+	<div id="header" {% if request.path != '/'%} class="header-insight" {% else %} class="header" {% endif %}>
+
+		{% include 'partials/nav.html' %}
+
 		{% block logo %}
 		{% endblock logo %}
 	</div>
 	<!-- Header -->
 
 	<!-- Main -->
-		{% block content %}
-		{% endblock content %}
+	{% block content %}
+	{% endblock content %}
 	<!-- /Main -->
 
 	<!-- Tweet -->
