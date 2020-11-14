@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/custom/loginform.css' %}" />
+{% endblock head %}
+
+{% block content %}
+<div id="main">
+    <table>
+        <tr>
+            <th>Case</th>
+            <th>Shop</th>
+            <th>Price</th>
+            <th>Date</th>
+        </tr>
+        <tr>
+            <td>bumper</td>
+            <td>auto-mauto</td>
+            <td>200$</td>
+            <td>29-12-20</td>
+        </tr>
+    </table>
+</div>
+{% endblock content %}
