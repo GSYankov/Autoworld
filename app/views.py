@@ -1,13 +1,39 @@
 from django.shortcuts import render, redirect
-from app.forms import LoginForm, ImageForm
+from app.forms import LoginForm, ImageForm, RegisterForm
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
+
 
 # Create your views here.
 
 
 def home(request):
     return render(request, 'home.html')
+
+
+def register_user(request, role):
+    if request.method == 'GET':
+        context = {
+            'form': RegisterForm(),
+            'role': role
+        }
+        return render(request, 'auth/register.html', context)
+    else:
+        register_form = RegisterForm(request.POST)
+
+        if register_form.is_valid():
+            user = register_form.save()
+            user_group = Group.objects.get(name=role) 
+            user_group.user_set.add(user)
+            login(request, user)
+
+            return redirect('home')
+
+        context = {
+            'form': register_form
+        }
+        return render(request, 'auth/register.html', context)
 
 
 def login_user(request):
@@ -50,6 +76,7 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect('home')
+
 
 @login_required
 def customer(request):

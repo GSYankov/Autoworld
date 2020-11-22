@@ -9,6 +9,8 @@
             <li><a href="{% url 'logout' %}">Logout</a></li>
             {% else %}
             <li><a href="{% url 'login' %}">Log In</a></li>
+            <li><a href="{% url 'register' 'customer' %}">Register</a></li>
+            <li><a href="{% url 'register' 'trader' %}">Register Trader</a></li>
             {% endif %}
         </ul>
     </nav>
