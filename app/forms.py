@@ -1,8 +1,11 @@
-from django.forms import ModelForm
+from django import forms
 from app.models import Image
 
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField()
 
-class ImageForm(ModelForm):
+class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = '__all__'

@@ -8,15 +8,16 @@
 
 {% block content %}
 <div id="main" class="form-bg">
-    <form action="#" method="GET">
+    <form action="{% url 'login' %}" method="POST">
         <fieldset>
             <legend>Login</legend>
+            {{error}}
             <p class="field-icon">
                 <input type="text" name="username" id="username" placeholder="email">
                 <label for="username"><span>Email</span></label>
             </p>
             <p class="field-icon">
-                <input type="password" name="pass" id="pass">
+                <input type="password" name="password" id="password">
                 <label for="pass"><span>Password</span></label>
             </p>
             <p>

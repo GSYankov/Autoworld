@@ -5,7 +5,11 @@
             <li><a href="{% url 'home' %}">Homepage</a></li>
             <li><a href="{% url 'customer' %}">Left Sidebar</a></li>
             <li class="active"><a href="{% url 'file-form' %}">File Form</a></li>
+            {% if request.user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
             <li><a href="{% url 'login' %}">Log In</a></li>
+            {% endif %}
         </ul>
     </nav>
 </div>
