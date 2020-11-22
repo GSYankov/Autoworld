@@ -10,6 +10,7 @@
 <div id="main" class="form-bg">
     <form action="{% url 'login' %}" method="POST">
         <fieldset>
+            <input type="hidden" value="{{request.GET.next}}" name="next" id="next">
             <legend>Login</legend>
             {{error}}
             <p class="field-icon">

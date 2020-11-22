@@ -23,6 +23,7 @@ def login_user(request):
     else:
         form = LoginForm(request.POST)
 
+        redirect_url = request.POST.get('next')
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
@@ -30,7 +31,7 @@ def login_user(request):
 
             if user:
                 login(request, user)
-                return redirect('home')
+                return redirect(redirect_url if redirect_url else 'home')
             else:
                 context = {
                     'error': 'Wrong username or password!'
@@ -44,6 +45,7 @@ def login_user(request):
 
             return render(request, 'login.html', context)
 
+
 @login_required
 def logout_user(request):
     logout(request)
@@ -54,6 +56,7 @@ def customer(request):
     return render(request, 'home_loggedin_customer.html')
 
 
+@login_required
 def file_form(request):
     if request.method == 'GET':
         context = {
