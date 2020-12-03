@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Articles</h1>
+<ul>
+    {% for order in orders %}
+    <li>
+        {% if order.id in my_offered_orders_ids %}
+        <li>{{ order.description}}</li>
+        {% else %}
+        <form action="{% url 'make offer' order.id %}" method="POST">
+            {% csrf_token %}
+           <button type="submit" style="cursor: pointer;">
+            {{ order.description}}
+        </button> 
+        </form>
+    </li>
+    {% endif %}
+    {% empty %}
+    <li>No orders yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

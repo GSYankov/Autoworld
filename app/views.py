@@ -9,6 +9,12 @@ from django.contrib.auth.models import Group
 
 
 def home(request):
+    if request.user.groups.filter(name='customer').exists():
+        return redirect('orders create')
+
+    if request.user.groups.filter(name='trader').exists():
+        return redirect('orders list')
+
     return render(request, 'home.html')
 
 
@@ -24,7 +30,7 @@ def register_user(request, role):
 
         if register_form.is_valid():
             user = register_form.save()
-            user_group = Group.objects.get(name=role) 
+            user_group = Group.objects.get(name=role)
             user_group.user_set.add(user)
             login(request, user)
 
