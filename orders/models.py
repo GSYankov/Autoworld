@@ -12,6 +12,9 @@ class Order(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     description = models.TextField()
 
+    def __str__(self) -> str:
+        return self.description
+
 class Offer(models.Model):
     order = models.ForeignKey(
         Order, on_delete=CASCADE
@@ -24,3 +27,6 @@ class Offer(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     # price = models.DecimalField(max_digits=6, decimal_places=2)
+
+    def __str__(self) -> str:
+        return self.order.description

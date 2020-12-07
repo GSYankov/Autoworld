@@ -6,7 +6,11 @@
             <li><a href="{% url 'customer' %}">Left Sidebar</a></li>
             <li class="active"><a href="{% url 'file-form' %}">File Form</a></li>
             {% ifequal request.user.groups.all.0.name 'customer' %}
-                <li><a href="{% url 'my orders' %}">My Orders</a></li>
+            <li><a href="{% url 'my orders customer' %}">My Orders</a></li>
+
+            {% endifequal %}
+            {% ifequal request.user.groups.all.0.name 'trader' %}
+            <li><a href="{% url 'my offers' %}">My Offers</a></li>
 
             {% endifequal %}
             {% if request.user.is_authenticated %}

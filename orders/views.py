@@ -19,7 +19,7 @@ class OrderCreateView(CreateView):
 @require_safe
 def orders_list(request):
     orders=Order.objects.all()
-    my_offered_orders_ids=[offer.id for offer in Offer.objects.filter(trader=request.user)]
+    my_offered_orders_ids=[offer.order.id for offer in Offer.objects.filter(trader=request.user)]
     context={
         "orders": orders,
         "my_offered_orders_ids": my_offered_orders_ids
@@ -42,3 +42,20 @@ def make_offer(request, order_id):
         offer.save()
         return redirect('orders list')
 
+
+class MyOffersList(ListView):
+    model = Offer
+    template_name = 'orders/list-offers.html'
+    
+    def get_queryset(self):
+        return Offer.objects.filter(trader=self.request.user)
+
+class MyOrdersCustomerList(ListView):
+    model = Order
+    template_name = 'orders/list-orders-customer.html'
+    
+    def get_queryset(self):
+        queryset = Order.objects.filter(customer=self.request.user)
+        # queryset = Order.objects.filter(offer__order__customer=self.request.user)
+        
+        return queryset
