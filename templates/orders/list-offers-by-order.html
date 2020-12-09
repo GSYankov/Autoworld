@@ -8,7 +8,8 @@
         {% if offer.isAccepted %}
             {{ offer.trader }} - ${{ offer.price }} - Accepted
         {% else %}
-            {{ offer.trader }} - ${{ offer.price }}
+            {{ offer.trader }} - ${{ offer.price }} -
+            <img src="/media/{{ offer.trader.userprofile.profile_picture }}" />
             <form action="{% url 'accept offer' offer.id %}" method="POST">
                 {% csrf_token %}
                 <button type="submit">Accept</button>

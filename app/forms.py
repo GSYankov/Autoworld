@@ -1,5 +1,5 @@
 from django import forms
-from app.models import Image
+from app.models import Image, UserProfile
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from core.BootstrapFormMixin import BootstrapFormMixin
@@ -40,3 +40,8 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = '__all__'
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('profile_picture',)

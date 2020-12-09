@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from app.forms import LoginForm, ImageForm, RegisterForm
+from app.forms import LoginForm, ImageForm, RegisterForm, UserProfileForm
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
@@ -22,6 +22,7 @@ def register_user(request, role):
     if request.method == 'GET':
         context = {
             'form': RegisterForm(),
+            'user_register_form': UserProfileForm(),
             'role': role
         }
         return render(request, 'auth/register.html', context)
@@ -32,6 +33,17 @@ def register_user(request, role):
             user = register_form.save()
             user_group = Group.objects.get(name=role)
             user_group.user_set.add(user)
+            form = UserProfileForm(request.POST, request.FILES)
+            if form.is_valid():
+               up = form.save(commit=False)
+               up.user_id = user.id
+               up.save()
+            else:
+                context = {
+                    'form': register_form,
+                    'role': role
+                }
+                return render(request, 'auth/register.html', context)
             login(request, user)
 
             return redirect('home')

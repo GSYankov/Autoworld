@@ -11,8 +11,9 @@
 
 {% block content %}
 <div id="main" class="d-flex justify-content-center w-75 form-bg">
-    <form action="{% url 'register' role %}" method="POST">
+    <form action="{% url 'register' role %}" method="POST" enctype="multipart/form-data">
         {{ form }}
+        {{ user_register_form }}
         {% csrf_token %}
         <button type="submit">Register</button>
         </fieldset>
