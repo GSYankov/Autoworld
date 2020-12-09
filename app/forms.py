@@ -2,9 +2,15 @@ from django import forms
 from app.models import Image
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from core.BootstrapFormMixin import BootstrapFormMixin
 
 
-class RegisterForm(UserCreationForm):
+
+class RegisterForm(UserCreationForm, BootstrapFormMixin):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.setup_form()
+
     class Meta:
         model = User
         fields = ('username', 'email')

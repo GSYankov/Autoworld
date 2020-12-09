@@ -1,12 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block head %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="icon" type="image/png" href="https://pluspng.com/img-png/instagram-png-instagram-png-icon-1024.png">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+{% endblock head %}
+
 {% block content %}
-<div id="main" class="form-bg">
+<div id="main" class="d-flex justify-content-center w-75 form-bg">
     <form action="{% url 'register' role %}" method="POST">
-            {{ form }}
-            {% csrf_token %}
-            <button type="submit">Register</button>
+        {{ form }}
+        {% csrf_token %}
+        <button type="submit">Register</button>
         </fieldset>
     </form>
 </div>
