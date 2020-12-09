@@ -24,13 +24,6 @@ class RegisterForm(UserCreationForm):
             raise forms.ValidationError('username is required')
         return username
 
-    def clean_password2(self):
-        return
-
-    def _post_clean(self):
-        super()._post_clean()
-        return
-
 
 class LoginForm(forms.Form):
     username = forms.CharField()

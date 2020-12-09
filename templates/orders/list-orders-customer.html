@@ -5,7 +5,7 @@
 <ul>
     {% for order in object_list %}
     <li>
-        <li>{{ order.description }} - {{order.offer_set.count}} </li>
+        <a href="{% url 'get offers by order id' order.id %}">{{ order.description }} - {{order.offer_set.count}} </a>
     </li>
     {% empty %}
     <li>No orders yet.</li>

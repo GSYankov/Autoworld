@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Offers for order: {{ object_list.all.0 }}</h1>
+<ul>
+    {% for offer in object_list %}
+    <li>
+        {{offer.trader}}
+    </li>
+    {% empty %}
+    <li>No orders yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

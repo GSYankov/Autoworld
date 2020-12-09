@@ -17,7 +17,7 @@ def home(request):
 
     return render(request, 'home.html')
 
-
+#  2jdx&qh'bUQ<$s9D
 def register_user(request, role):
     if request.method == 'GET':
         context = {
@@ -37,7 +37,8 @@ def register_user(request, role):
             return redirect('home')
 
         context = {
-            'form': register_form
+            'form': register_form,
+            'role': role
         }
         return render(request, 'auth/register.html', context)
 
