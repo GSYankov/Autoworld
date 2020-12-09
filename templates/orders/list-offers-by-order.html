@@ -5,7 +5,15 @@
 <ul>
     {% for offer in object_list %}
     <li>
-        {{offer.trader}}
+        {% if offer.isAccepted %}
+            {{ offer.trader }} - ${{ offer.price }} - Accepted
+        {% else %}
+            {{ offer.trader }} - ${{ offer.price }}
+            <form action="{% url 'accept offer' offer.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Accept</button>
+            </form>
+        {% endif %}
     </li>
     {% empty %}
     <li>No orders yet.</li>

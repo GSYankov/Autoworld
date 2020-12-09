@@ -4,7 +4,8 @@ from orders.models import Offer, Order
 from django.shortcuts import redirect, render
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.models import User
-from django.views.decorators.http import require_safe
+from django.views.decorators.http import require_safe, require_POST
+from orders.forms import OfferForm
 
 
 class OrderCreateView(CreateView):
@@ -43,10 +44,12 @@ class MyOrdersList(ListView):
 
 def make_offer(request, order_id):
     if request.method == 'POST':
-        order = Order.objects.get(id=order_id)
-        trader = request.user
-        offer = Offer(trader=trader, order=order)
-        offer.save()
+        form = OfferForm(request.POST)
+        if form.is_valid:
+            offer = form.save(commit=False)
+            offer.order = Order.objects.get(id=order_id)
+            offer.trader = request.user
+            offer.save()
         return redirect('orders list')
 
 
@@ -75,3 +78,10 @@ class GetOffersListByOrderId(ListView):
 
     def get_queryset(self):
         return Offer.objects.filter(order__id=self.kwargs['order_id'])
+
+@require_POST
+def accept_offer(request, offer_id):
+    offer= Offer.objects.get(id=offer_id)
+    offer.isAccepted = True
+    offer.save()
+    return redirect('my orders customer')

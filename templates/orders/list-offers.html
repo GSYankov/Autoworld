@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Articles</h1>
+<h1>My Offers</h1>
 <ul>
     {% for offer in object_list %}
     <li>
-        {{ offer.order.description }}
+        {{ offer.order.description }} - ${{ offer.price }} 
+        {% if offer.isAccepted %}
+           - Accepted
+        {% endif %}
     </li>
     {% endfor %}
 </ul>
