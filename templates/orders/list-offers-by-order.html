@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/custom/common.css' %}" />
+{% endblock head %}
 
 {% block content %}
 <h1>Offers for order: {{ object_list.all.0 }}</h1>
@@ -6,10 +11,11 @@
     {% for offer in object_list %}
     <li>
         {% if offer.isAccepted %}
+        <img class="avatar" src="/media/{{ offer.trader.userprofile.profile_picture }}" />
             {{ offer.trader }} - ${{ offer.price }} - Accepted
         {% else %}
-            {{ offer.trader }} - ${{ offer.price }} -
-            <img src="/media/{{ offer.trader.userprofile.profile_picture }}" />
+        <img class="avatar" src="/media/{{ offer.trader.userprofile.profile_picture }}" />
+            {{ offer.trader }} - ${{ offer.price }}
             <form action="{% url 'accept offer' offer.id %}" method="POST">
                 {% csrf_token %}
                 <button type="submit">Accept</button>
