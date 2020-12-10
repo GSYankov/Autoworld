@@ -1,3 +1,23 @@
+h1{
+    text-align: center;
+}
 .avatar{
     width: 2rem;
+}
+
+.loc-li{
+    display: inline-block;
+    margin: 1rem 1rem;
+}
+
+.lobo-li{
+    display: flex;
+    justify-content: center;
+}
+
+.lobo-li .card{
+    width: 18rem;
+    text-align: center;
+    border: solid;
+    border-radius: 2rem;
 }

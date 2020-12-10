@@ -1,11 +1,29 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="icon" type="image/png" href="https://pluspng.com/img-png/instagram-png-instagram-png-icon-1024.png">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+{% endblock head %}
 
 {% block content %}
 <h1>Articles</h1>
 <ul>
     {% for order in object_list %}
-    <li>
-        <a href="{% url 'get offers by order id' order.id %}">{{ order.description }} - {{order.offer_set.count}} </a>
+    <li class="loc-li">
+        <a href="{% url 'get offers by order id' order.id %}">
+        <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+          <p>Description: {{ order.description }} - {{order.offer_set.count}}</p>
+          <p>Orders count: {{order.offer_set.count}}</p>
+        </div>
+      </div>
+        <!-- <a href="{% url 'get offers by order id' order.id %}">{{ order.description }} - {{order.offer_set.count}} </a> -->
+    </a>
     </li>
     {% empty %}
     <li>No orders yet.</li>

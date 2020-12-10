@@ -1,25 +1,31 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block head %}
-<link rel="stylesheet" href="{% static 'css/custom/common.css' %}" />
-{% endblock head %}
-
 {% block content %}
 <h1>Offers for order: {{ object_list.all.0 }}</h1>
 <ul>
     {% for offer in object_list %}
-    <li>
+    <li class="lobo-li">
         {% if offer.isAccepted %}
         <img class="avatar" src="/media/{{ offer.trader.userprofile.profile_picture }}" />
             {{ offer.trader }} - ${{ offer.price }} - Accepted
         {% else %}
-        <img class="avatar" src="/media/{{ offer.trader.userprofile.profile_picture }}" />
+        <div class="card" style="width: 18rem;">
+            <img class="avatar" src="/media/{{ offer.trader.userprofile.profile_picture }}" />
+            <div class="card-body">
+              <p class="card-text">Trader: {{ offer.trader }}</p>
+              <p class="card-text">${{ offer.price }}</p>
+            </div>
+            <form action="{% url 'accept offer' offer.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Accept</button>
+          </div>
+        <!-- <img class="avatar" src="/media/{{ offer.trader.userprofile.profile_picture }}" />
             {{ offer.trader }} - ${{ offer.price }}
             <form action="{% url 'accept offer' offer.id %}" method="POST">
                 {% csrf_token %}
                 <button type="submit">Accept</button>
-            </form>
+            </form> -->
         {% endif %}
     </li>
     {% empty %}
