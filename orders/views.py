@@ -1,4 +1,6 @@
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
+from django.views.generic.edit import DeleteView, UpdateView
 import orders
 from orders.models import Offer, Order
 from django.shortcuts import redirect, render
@@ -6,9 +8,10 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.models import User
 from django.views.decorators.http import require_safe, require_POST
 from orders.forms import OfferForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class OrderCreateView(CreateView):
+class OrderCreateView(LoginRequiredMixin, CreateView):
     model = Order
     template_name = 'orders/create-order.html'
     fields = ('description',)
@@ -34,7 +37,7 @@ def orders_list(request):
     return render(request, 'orders/list-orders.html', context)
 
 
-class MyOrdersList(ListView):
+class MyOrdersList(LoginRequiredMixin, ListView):
     model = Order
     template_name = 'orders/list-orders.html'
 
@@ -53,7 +56,7 @@ def make_offer(request, order_id):
         return redirect('orders list')
 
 
-class MyOffersList(ListView):
+class MyOffersList(LoginRequiredMixin, ListView):
     model = Offer
     template_name = 'orders/list-offers.html'
 
@@ -61,7 +64,7 @@ class MyOffersList(ListView):
         return Offer.objects.filter(trader=self.request.user)
 
 
-class MyOrdersCustomerList(ListView):
+class MyOrdersCustomerList(LoginRequiredMixin, ListView):
     model = Order
     template_name = 'orders/list-orders-customer.html'
 
@@ -72,16 +75,30 @@ class MyOrdersCustomerList(ListView):
         return queryset
 
 
-class GetOffersListByOrderId(ListView):
+class GetOffersListByOrderId(LoginRequiredMixin, ListView):
     model = Offer
     template_name = 'orders/list-offers-by-order.html'
 
     def get_queryset(self):
         return Offer.objects.filter(order__id=self.kwargs['order_id'])
 
+
 @require_POST
 def accept_offer(request, offer_id):
-    offer= Offer.objects.get(id=offer_id)
+    offer = Offer.objects.get(id=offer_id)
     offer.isAccepted = True
     offer.save()
     return redirect('my orders customer')
+
+
+class OrderUpdate(LoginRequiredMixin, UpdateView):
+    model = Order
+    fields = ['description']
+    template_name = 'orders/order-edit.html'
+    success_url = '/'
+
+
+class OrderDelete(LoginRequiredMixin, DeleteView):
+    model = Order
+    success_url = reverse_lazy('my offers')
+    template_name = 'orders/order-delete.html'

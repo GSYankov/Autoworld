@@ -20,9 +20,10 @@
         <div class="card-body">
           <p>Description: {{ order.description }} - {{order.offer_set.count}}</p>
           <p>Orders count: {{order.offer_set.count}}</p>
+          <a href="{% url 'edit order' order.id %}">Edit</a>
+          <a href="{% url 'order delete' order.id %}">Delete</a>
         </div>
       </div>
-        <!-- <a href="{% url 'get offers by order id' order.id %}">{{ order.description }} - {{order.offer_set.count}} </a> -->
     </a>
     </li>
     {% empty %}

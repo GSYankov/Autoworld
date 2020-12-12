@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.db.models.deletion import CASCADE
-
+from django.urls import reverse
 
 class Order(models.Model):
     customer = models.ForeignKey(
@@ -11,6 +11,9 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     description = models.TextField()
+
+    # def get_absolute_url(self):
+    #     return reverse('order-detail', kwargs={'pk': self.pk})
 
     def __str__(self) -> str:
         return self.description
