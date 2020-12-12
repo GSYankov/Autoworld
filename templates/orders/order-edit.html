@@ -2,10 +2,10 @@
 
 {% block content %}
 
-<h1>Delete order: {{order}}</h1>
+<h1>Edit order: {{order}}</h1>
 <form method="post">
     {% csrf_token %}
-    <p>Are you sure you want to delete "{{ order }}"?</p>
-    <input type="submit" value="Confirm">
+    {{ form.as_p }}
+    <input type="submit" value="Update">
 </form>
 {% endblock %}

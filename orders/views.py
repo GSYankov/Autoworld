@@ -95,10 +95,11 @@ class OrderUpdate(LoginRequiredMixin, UpdateView):
     model = Order
     fields = ['description']
     template_name = 'orders/order-edit.html'
-    success_url = '/'
+    success_url = reverse_lazy('my orders customer')
+
 
 
 class OrderDelete(LoginRequiredMixin, DeleteView):
     model = Order
-    success_url = reverse_lazy('my offers')
+    success_url = reverse_lazy('my orders customer')
     template_name = 'orders/order-delete.html'
