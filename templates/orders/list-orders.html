@@ -2,11 +2,11 @@
 
 {% block content %}
 <h1>Orders</h1>
-<ul>
+<ul class="lo-ul">
     {% for order in orders %}
     <li>
         {% if order.id in my_offered_orders_ids %}
-    <li>{{ order }} </li>
+    <li>{{ order }} - Offer sent</li>
     {% else %}
     <form action="{% url 'make offer' order.id %}" method="POST">
         {% csrf_token %}

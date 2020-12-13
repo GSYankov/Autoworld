@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1>My Offers</h1>
-<ul>
+<ul class="lo-ul">
     {% for offer in object_list %}
     <li>
         {{ offer.order.description }} - ${{ offer.price }} 

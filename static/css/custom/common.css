@@ -1,6 +1,22 @@
+body{
+    background-color: darkslategrey !important;
+}
+
 h1{
     text-align: center;
+    font: revert;
+    margin: 1rem;
+    color: whitesmoke;
 }
+
+p{
+    color: antiquewhite;
+}
+
+div .card{
+    background-color: burlywood;
+}
+
 .avatar{
     width: 2rem;
 }
@@ -20,4 +36,9 @@ h1{
     text-align: center;
     border: solid;
     border-radius: 2rem;
+}
+
+.lo-ul{
+    text-align: center;
+    margin-top: 2rem;
 }

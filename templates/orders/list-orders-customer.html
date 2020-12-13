@@ -10,7 +10,7 @@
 {% endblock head %}
 
 {% block content %}
-<h1>Articles</h1>
+<h1>Orders</h1>
 <ul>
     {% for order in object_list %}
     <li class="loc-li">
@@ -18,7 +18,7 @@
         <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="..." alt="Card image cap">
         <div class="card-body">
-          <p>Description: {{ order.description }} - {{order.offer_set.count}}</p>
+          <p>Description: {{ order.description }}</p>
           <p>Orders count: {{order.offer_set.count}}</p>
           <a href="{% url 'edit order' order.id %}">Edit</a>
           <a href="{% url 'order delete' order.id %}">Delete</a>

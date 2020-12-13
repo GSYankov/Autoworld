@@ -3,7 +3,7 @@
 {% block content %}
 
 <h1>Edit order: {{order}}</h1>
-<form method="post">
+<form class="lo-ul" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Update">
